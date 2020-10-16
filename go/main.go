@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/valyala/fastjson"
 	"log"
 	"os"
 )
@@ -30,10 +31,12 @@ func main() {
 	}()
 	
 	s := bufio.NewScanner(f)
+	var p fastjson.Parser
 
 	lineNumber := 1
     for s.Scan() {
-		if isJSON(s.Text()) == false {
+		_, err := p.Parse(s.Text())
+		if err != nil {
 			fmt.Printf("Error: line %v\n", lineNumber)
 		}
 		lineNumber++
