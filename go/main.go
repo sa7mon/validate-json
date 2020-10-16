@@ -35,7 +35,7 @@ func main() {
 
 	lineNumber := 1
     for s.Scan() {
-		_, err := p.Parse(s.Text())
+		_, err := p.ParseBytes(s.Bytes())
 		if err != nil {
 			fmt.Printf("Error: line %v\n", lineNumber)
 		}

@@ -1,3 +1,4 @@
 *.testjson
 */.idea
 */node_modules/
+*.bin
