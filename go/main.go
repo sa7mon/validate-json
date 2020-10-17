@@ -25,6 +25,8 @@ func main() {
 	}()
 	
 	s := bufio.NewScanner(f)
+	buf := make([]byte, 0, 64*1024)
+	s.Buffer(buf, 1024*1024)
 	lineNumber := 1
     for s.Scan() {
     	err := fastjson.ValidateBytes(s.Bytes())
