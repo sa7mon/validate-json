@@ -2,18 +2,12 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/valyala/fastjson"
 	"log"
 	"os"
 )
-
-func isJSON(s string) bool {
-    var js map[string]interface{}
-    return json.Unmarshal([]byte(s), &js) == nil
-}
 
 func main() {
 	fptr := flag.String("file", "test.txt", "file path to read from")
@@ -31,11 +25,9 @@ func main() {
 	}()
 	
 	s := bufio.NewScanner(f)
-	var p fastjson.Parser
-
 	lineNumber := 1
     for s.Scan() {
-		_, err := p.ParseBytes(s.Bytes())
+    	err := fastjson.ValidateBytes(s.Bytes())
 		if err != nil {
 			fmt.Printf("Error: line %v\n", lineNumber)
 		}
